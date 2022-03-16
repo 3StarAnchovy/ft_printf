@@ -25,8 +25,6 @@ all:		$(NAME)
 $(NAME):	$(OBJECTS)
 	ar -rc $@ $^
 
-bonus:
-	@make WITH_BONUS=1 all
 
 *.o:		*.c
 	$(CC) $(CFLAGS) -c $< -o $@
