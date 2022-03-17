@@ -6,7 +6,7 @@
 /*   By: jihong <jihong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:21:04 by jihong            #+#    #+#             */
-/*   Updated: 2022/03/16 21:08:12 by jihong           ###   ########.fr       */
+/*   Updated: 2022/03/17 22:35:41 by jihong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ int ft_printf(const char *format, ...)
 
 int main()
 {
-	int test = -2147483649;
-	int num = printf("%d",test);
+	int test = 47;
+	int num = ft_printf("%X",test);
 	printf("\n");
 	printf("%d",num);
 }

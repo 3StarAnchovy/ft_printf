@@ -6,7 +6,7 @@
 /*   By: jihong <jihong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 20:37:36 by jihong            #+#    #+#             */
-/*   Updated: 2022/03/16 21:14:09 by jihong           ###   ########.fr       */
+/*   Updated: 2022/03/17 22:35:42 by jihong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,26 @@ int check_form(char c_format)
 		return (0);
 }
 
+void ft_puthex(char c_format, int n, int *len)
+{
+	char	*hex;
+	int		i;
+
+	i = 0;
+	if(c_format == 'x')
+		hex = "0123456789abcdef";
+	if(c_format == 'X')
+		hex = "0123456789ABCDEF";
+	if(n > 15)
+	{
+		*len += 1;
+		ft_puthex(c_format, n/16, len);
+		ft_putchar(hex[n % 16], len);
+	}
+	else
+		ft_putchar(hex[n], len);
+}
+
 void check_style(int *len, char c_format, va_list ap)
 {
 	if(c_format == 'c')
@@ -85,6 +105,8 @@ void check_style(int *len, char c_format, va_list ap)
 		ft_putstr(va_arg(ap, char *), len);
 	if(c_format == 'd')
 		ft_putnbr(va_arg(ap, int), len);
+	if(c_format == 'x' || c_format == 'X')
+		ft_puthex(c_format, va_arg(ap, int), len);
 	// if(c_format == 'p')
 	// 	ft_hex_add(va_arg(ap, void *), len);
 }
