@@ -6,33 +6,28 @@
 #    By: jihong <jihong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/10 18:36:03 by jihong            #+#    #+#              #
-#    Updated: 2022/03/12 20:15:05 by jihong           ###   ########.fr        #
+#    Updated: 2022/03/18 20:52:30 by jihong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		:=	libftprintf.a
-SRC			:=	ft_printf.c\
-OBJ			:=	$(SRC:.c=.o)
-CFLAGS		:=	-Wall -Wextra -Werror
+NAME = libftprintf.a
+CC = gcc
+CFLAG = -Wall -Werror -Wextra
+CFILES = ft_printf.c ft_printf_arg.c ft_printf_arg2.c
+OBJ = $(CFILES:.c=.o)
 
-OBJECTS = $(OBJ)
+all: $(NAME)
 
+$(NAME) : $(OBJ)
+	ar rcs $(NAME) $(OBJ)
 
-.PHONY:		all bonus clean fclean re
+$(OBJ) : $(CFILES)
+	$(CC) $(CFLAGS) -c $(CFILES)
 
-all:		$(NAME)
+clean :
+	rm -rf *.o
 
-$(NAME):	$(OBJECTS)
-	ar -rc $@ $^
+fclean : clean
+	rm -rf $(NAME)
 
-
-*.o:		*.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
-clean:
-	@rm -f $(OBJ) $(BOBJ)
-
-fclean:		clean
-	@rm -f $(NAME)
-
-re:			fclean all
+re : fclean all
