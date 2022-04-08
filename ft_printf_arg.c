@@ -6,29 +6,30 @@
 /*   By: jihong <jihong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 20:43:59 by jihong            #+#    #+#             */
-/*   Updated: 2022/03/18 20:53:26 by jihong           ###   ########.fr       */
+/*   Updated: 2022/04/08 20:09:38 by jihong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void ft_putchar(char c_format, int *len)
+void	ft_putchar(char c_format, int *len)
 {
 	write(1, &c_format, 1);
 	*len += 1;
 }
 
-void ft_putstr(char *str, int *len)
+void	ft_putstr(char *str, int *len)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	if(str == NULL)
+	if (!str)
 	{
-		write(1,"(null)",6);
+		write(1, "(null)", 6);
 		*len += 6;
+		return ;
 	}
-	while(str[i] != '\0')
+	while (str[i] != '\0')
 	{
 		write(1, &str[i], 1);
 		i ++;
@@ -36,7 +37,7 @@ void ft_putstr(char *str, int *len)
 	}
 }
 
-void	rec_nb(int div, int mod, char str, int *len)
+void	rec_nb(unsigned int div, unsigned int mod, char str, int *len)
 {
 	*len += 1;
 	mod = div % 10;
@@ -50,6 +51,7 @@ void	rec_nb(int div, int mod, char str, int *len)
 void	ft_putnbr(int n, int *len)
 {
 	char	str;
+
 	if (n == -2147483648)
 	{
 		write(1, "-2147483648", 11);
@@ -67,7 +69,7 @@ void	ft_putnbr(int n, int *len)
 		rec_nb(n, 0, '\0', len);
 }
 
-void ft_put_unsigned_nbr(unsigned int n, int *len)
+void	ft_put_unsigned_nbr(unsigned int n, int *len)
 {
 	rec_nb(n, 0, '\0', len);
 }
